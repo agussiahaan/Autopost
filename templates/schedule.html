@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Daftar Jadwal Post</h2>
+
+<table>
+<tr><th>Platform</th><th>Pesan</th><th>Waktu</th></tr>
+{% for i in data %}
+<tr>
+    <td>{{ i[1] }}</td><td>{{ i[2] }}</td><td>{{ i[4] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="/dashboard">Kembali</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Automation - Buat Jadwal Post</h2>
+
+<form method="POST">
+    <input type="text" name="platform" placeholder="Platform (facebook / instagram / tiktok / twitter)" required>
+    <input type="text" name="message" placeholder="Tulis pesan..." required>
+    <input type="text" name="image" placeholder="URL gambar (opsional)">
+    <label style="display:block; margin-top:10px;">Waktu jadwal:</label>
+    <input type="datetime-local" name="schedule_time" required>
+
+    <button type="submit">Simpan Jadwal</button>
+</form>
+
+<a href="/dashboard">Kembali</a>
+{% endblock %}
