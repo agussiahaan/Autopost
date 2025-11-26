@@ -1,20 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Dashboard</h2>
-<p style="text-align:center;">Selamat datang, <b>{{ user }}</b>!</p>
-
-<hr style="margin:20px 0; border-color:rgba(255,255,255,0.1);">
-
-<h3>Menu</h3>
-
-<ul style="list-style:none; padding:0;">
-    <li><a href="/dashboard">🏠 Dashboard</a></li>
-    <li><a href="/post">✍️ Buat Jadwal Post</a></li>
-    <li><a href="/schedule">🗓️ Jadwal</a></li>
-    <li><a href="/history">📜 Riwayat</a></li>
-    {% if user == "admin" %}
-    <li><a href="/admin">👑 Admin - Kelola User</a></li>
-    {% endif %}
-    <li><a href="/logout">🚪 Logout</a></li>
+<p>Selamat datang, <b>{{user}}</b></p>
+<ul>
+<li><a href="/channels">📡 Channels</a></li>
+<li><a href="/logout">Logout</a></li>
 </ul>
 {% endblock %}
