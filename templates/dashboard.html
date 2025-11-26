@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Dashboard - Sosmed Auto</h2>
-<p>Selamat datang, <b>{{ user }}</b>!</p>
-<hr>
-<h3>Menu Utama</h3>
-<ul>
+<h2>Dashboard</h2>
+<p style="text-align:center;">Selamat datang, <b>{{ user }}</b>!</p>
+
+<hr style="margin:20px 0; border-color:rgba(255,255,255,0.1);">
+
+<h3>Menu</h3>
+
+<ul style="list-style:none; padding:0;">
     <li><a href="/dashboard">🏠 Dashboard</a></li>
     {% if user == "admin" %}
     <li><a href="/admin">👑 Admin - Kelola User</a></li>
