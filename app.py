@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3, os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 DB_NAME = "database.db"
+UPLOAD_FOLDER = "uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def init_db():
     new = not os.path.exists(DB_NAME)
@@ -26,7 +29,7 @@ def login():
     if request.method=="POST":
         u=request.form["username"]; p=request.form["password"]
         conn=sqlite3.connect(DB_NAME); c=conn.cursor()
-        c.execute("SELECT * FROM users WHERE username=? AND password=?", (u,p))
+        c.execute("SELECT * FROM users WHERE username=? AND password=?",(u,p))
         user=c.fetchone(); conn.close()
         if user:
             session["user"]=u
@@ -44,6 +47,38 @@ def channels():
     if "user" not in session: return redirect("/")
     return render_template("channels.html")
 
+# FILE MANAGER
+@app.route("/files")
+def files_page():
+    if "user" not in session:
+        return redirect("/")
+    files = os.listdir(UPLOAD_FOLDER)
+    return render_template("files.html", files=files)
+
+@app.route("/upload_file", methods=["POST"])
+def upload_file():
+    if "user" not in session:
+        return redirect("/")
+    if "file" not in request.files:
+        return redirect("/files")
+    f = request.files["file"]
+    if f.filename == "":
+        return redirect("/files")
+    filename = secure_filename(f.filename)
+    f.save(os.path.join(UPLOAD_FOLDER, filename))
+    return redirect("/files")
+
+@app.route("/delete_file/<name>")
+def delete_file(name):
+    if "user" not in session:
+        return redirect("/")
+    try:
+        os.remove(os.path.join(UPLOAD_FOLDER, name))
+    except:
+        pass
+    return redirect("/files")
+
+# ADMIN USER SETTINGS
 @app.route("/admin")
 def admin_page():
     if "user" not in session or session["user"]!="admin":

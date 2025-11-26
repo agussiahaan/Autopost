@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>File Manager</h2>
+
+<h3>Upload File</h3>
+<form method="POST" action="/upload_file" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+
+<hr>
+
+<h3>Daftar File</h3>
+<table>
+<tr><th>Nama File</th><th>Aksi</th></tr>
+{% for f in files %}
+<tr>
+<td>{{f}}</td>
+<td><a href="/delete_file/{{f}}">Hapus</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="/dashboard">Kembali</a>
+{% endblock %}
