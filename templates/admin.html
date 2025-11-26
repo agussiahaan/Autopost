@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard Admin</h2>
+<p>Login sebagai: <b>{{ session['user'] }}</b></p>
+<a href="/logout">Logout</a>
+<hr>
+<h3>Tambah User Baru</h3>
+<form method="POST" action="/add_user">
+    <input type="text" name="username" placeholder="Username baru" required>
+    <input type="text" name="password" placeholder="Password baru" required>
+    <button type="submit">Tambah</button>
+</form>
+<hr>
+<h3>Daftar User</h3>
+<table border="1" width="100%">
+    <tr>
+        <th>ID</th><th>Username</th><th>Aksi</th>
+    </tr>
+    {% for u in users %}
+    <tr>
+        <td>{{ u[0] }}</td>
+        <td>{{ u[1] }}</td>
+        <td><a href="/delete_user/{{u[0]}}">Hapus</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,4 @@
+body { background: #111; color: #fff; font-family: Arial; }
+.container { width: 400px; margin: 40px auto; padding: 20px; background: #222; border-radius: 8px; }
+input, button { width: 100%; padding: 10px; margin-top: 10px; }
+button { background: #00aaff; border: none; cursor: pointer; }
