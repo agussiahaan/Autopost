@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard - Sosmed Auto</h2>
+<p>Selamat datang, <b>{{ user }}</b>!</p>
+<hr>
+<h3>Menu Utama</h3>
+<ul>
+    <li><a href="/dashboard">🏠 Dashboard</a></li>
+    {% if user == "admin" %}
+    <li><a href="/admin">👑 Admin - Kelola User</a></li>
+    {% endif %}
+    <li><a href="#">📌 Fitur Sosmed (coming soon)</a></li>
+    <li><a href="/logout">🚪 Logout</a></li>
+</ul>
+{% endblock %}

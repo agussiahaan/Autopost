@@ -34,10 +34,16 @@ def login():
         conn.close()
         if user:
             session["user"] = username
-            return redirect("/admin")
+            return redirect("/dashboard")
         else:
             return render_template("login.html", error="Username atau password salah!")
     return render_template("login.html")
+
+@app.route("/dashboard")
+def dashboard():
+    if "user" not in session:
+        return redirect("/")
+    return render_template("dashboard.html", user=session["user"])
 
 @app.route("/admin")
 def admin():
